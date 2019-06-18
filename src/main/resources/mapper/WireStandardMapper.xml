@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaokang.demo.dao.WireStandardMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xiaokang.demo.bean.WireStandard">
+        <id column="id" property="id" />
+        <result column="standard_number" property="standardNumber" />
+        <result column="wire_table" property="wireTable" />
+        <result column="pro_name" property="proName" />
+        <result column="state" property="state" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, standard_number, wire_table, pro_name, state
+    </sql>
+
+</mapper>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaokang.demo.dao.MachineMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xiaokang.demo.bean.Machine">
+        <id column="id" property="id" />
+        <result column="machine_number" property="machineNumber" />
+        <result column="state" property="state" />
+        <result column="machine_addr" property="machineAddr" />
+        <result column="machine_type" property="machineType" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, machine_number, state, machine_addr, machine_type
+    </sql>
+    <update id="updateAndDeleteById">
+        update machine set state = '999' where id=#{id,jdbcType=INTEGER}
+    </update>
+
+
+    <select id="getAll" resultType="com.xiaokang.demo.bean.Machine" resultMap="BaseResultMap">
+        select * from machine where state =000
+    </select>
+
+
+</mapper>

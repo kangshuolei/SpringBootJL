@@ -1,0 +1,117 @@
+﻿<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>巨力钢丝绳后台管理系统</title>
+    <link href="toastr.css" th:href="@{/static/tip/toastr.css}" rel="stylesheet"/>
+
+    <link rel="stylesheet" type="text/css" href="css/style.css" th:href="@{/static/login/css/style.css}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet"/>
+    <script src="http://i.gtimg.cn/qzone/biz/gdt/lib/jquery/jquery-2.1.4.js?max_age=31536000"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script type="text/javascript" src="js/jquery.min.js" th:src="@{/static/login/js/jquery.min.js}"></script>
+    <script type="text/javascript" src="js/vector.js" th:src="@{/static/login/js/vector.js}"></script>
+    <script src="toastr.js" th:src="@{/static/tip/toastr.js}"></script>
+</head>
+<body>
+
+<div id="container">
+    <div id="output">
+        <div class="containerT">
+            <h1>巨力集团钢丝绳检测后台数据监控系统</h1>
+            <form class="form" th:method="post" id="loginform">
+
+                <input type="text" placeholder="请输入用户名" name="username" id="username">
+                <input type="password" placeholder="请输入密码" name="password" id="password">
+                <input type="button" onclick="login()" value="登录"/>
+                <!--<button type="submit" onclick="login()" id="entry_btn">登录</button>-->
+                <div id="prompt" class="prompt"></div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    function login() {
+
+        toastr.options = {
+            closeButton: false,
+            debug: false,
+            progressBar: false,
+            positionClass: "toast-top-center",
+            onclick: null,
+            showDuration: "200",
+            hideDuration: "1000",
+            timeOut: "1750",
+            extendedTimeOut: "1000",
+            showEasing: "swing",
+            hideEasing: "linear",
+            showMethod: "fadeIn",
+            hideMethod: "fadeOut"
+        };
+
+        if (loginform.username.value=="") {
+            toastr.warning("请输入用户名！");loginform.username.focus();return false;
+        }
+        if(loginform.password.value==""){
+            toastr.warning("请输入密码！");loginform.password.focus();return false;
+        }
+
+
+
+        //alert("点击了");
+        var data = {};
+        data.username = $("#username").val();
+        data.password = $("#password").val();
+        
+
+
+        $.ajax({
+            url: "login",
+            type: "post",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify(data),
+
+            success: function (result) {
+            console.log(result);
+                if (result.code == "100")
+                    window.location.href = "toMainPage";
+                else {
+
+                    toastr.warning("用户名或密码错误");
+
+                }
+            },
+            error: function () {
+                toastr.error('服务器忙,请稍候重试...');
+
+            }
+        });
+    }
+    document.onkeydown=keyListener;
+    function keyListener(e){
+
+        if(e.keyCode == 13){
+            login();
+        }
+    }
+</script>
+<script type="text/javascript">
+    $(function () {
+        Victor("container", "output");   //登录背景函数
+        $("#entry_name").focus();
+        $(document).keydown(function (event) {
+            if (event.keyCode == 13) {
+                $("#entry_btn").click();
+            }
+        });
+    });
+</script>
+<div style="text-align:center;">
+    <p>更多模板：<a href="http://www.mycodes.net/" target="_blank">源码之家</a></p>
+</div>
+</body>
+</html>

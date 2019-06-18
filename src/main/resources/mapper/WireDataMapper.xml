@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaokang.demo.dao.WireDataMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xiaokang.demo.bean.WireData">
+        <id column="id" property="id" />
+        <result column="entrustment_number" property="entrustmentNumber" />
+        <result column="n_diamete" property="nDiamete" />
+        <result column="diamete" property="diamete" />
+        <result column="diamete_judge" property="diameteJudge" />
+        <result column="break_tensile" property="breakTensile" />
+        <result column="tensile_judge" property="tensileJudge" />
+        <result column="tensile_strength" property="tensileStrength" />
+        <result column="strength_judge" property="strengthJudge" />
+        <result column="knot_tension" property="knotTension" />
+        <result column="knot_rate" property="knotRate" />
+        <result column="knot_judge" property="knotJudge" />
+        <result column="turn_times" property="turnTimes" />
+        <result column="turn_judge" property="turnJudge" />
+        <result column="winding_times" property="windingTimes" />
+        <result column="twine_times" property="twineTimes" />
+        <result column="zinc_weight" property="zincWeight" />
+        <result column="zinc_judge" property="zincJudge" />
+        <result column="state" property="state" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, entrustment_number, n_diamete, diamete, diamete_judge, break_tensile, tensile_judge, tensile_strength, strength_judge, knot_tension, knot_rate, knot_judge, turn_times, turn_judge, winding_times, twine_times, zinc_weight, zinc_judge, state
+    </sql>
+
+</mapper>

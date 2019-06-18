@@ -1,0 +1,495 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-
+transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml "
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title></title>
+    <link href="/static/lib/ligerUI/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css"/>
+    <script src="/static/lib/jquery/jquery-1.9.0.min.js" type="text/javascript"></script>
+    <script src="/static/lib/ligerUI/js/core/base.js" type="text/javascript"></script>
+    <script src="/static/lib/ligerUI/js/plugins/ligerLayout.js" type="text/javascript"></script>
+    <script src="/static/lib/ligerUI/js/plugins/ligerTree.js" type="text/javascript"></script>
+    <script src="/static/lib/ligerUI/js/plugins/ligerAccordion.js" type="text/javascript"></script>
+    <script src="/static/lib/ligerUI/js/plugins/ligerPanel.js" type="text/javascript"></script>
+    <script src="/static/lib/ligerUI/js/plugins/ligerPortal.js" type="text/javascript"></script>
+    <script src="/static/lib/ligerUI/js/plugins/ligerDrag.js"></script>
+
+    <style type="text/css">
+
+    </style>
+
+    <script type="text/javascript">
+        $(function () {
+
+            $("#layout1").ligerLayout({
+                onLeftToggle: function (isColl) {
+
+                    /*alert(isColl ? "收缩" : "显示");*/
+                },
+                onRightToggle: function (isColl) {
+                    /*alert(isColl ? "收缩" : "显示");*/
+                },
+
+            });
+        });
+
+    </script>
+
+
+    <style type="text/css">
+        body {
+            padding: 10px;
+            margin: 0;
+        }
+
+        #layout1 {
+            width: 100%;
+            margin: 40px;
+            height: 400px;
+            margin: 0;
+            padding: 0;
+        }
+
+        #accordion1 {
+            height: 270px;
+        }
+
+        h4 {
+            margin: 20px;
+        }
+    </style>
+
+    <script type="text/javascript">
+        $(function () {
+
+            $("#accordion1").ligerAccordion(
+                {
+                    height: 300
+                });
+        });
+
+    </script>
+    <style type="text/css">
+        body {
+            padding: 20px;
+            margin: 0;
+        }
+
+        #accordion1 {
+            width: 160px;
+            overflow: hidden;
+        }
+    </style>
+
+</head>
+<body style="padding:10px">
+<div id="layout1">
+    <div position="left">
+        <div id="accordion1">
+            <div title="数据管理" data-icon="/static/lib/images/666.png">
+                <ul>
+                    <li><a href="javascript:void(0)" onclick="home_page()">首页</a></li>
+                    <li><a href="javascript:void(0)" onclick="Order_form()">委托单 </a></li>
+
+                    <li><a href="javascript:void(0)" onclick="Wire_Report()">钢丝报表</a></li>
+                    <li><a href="javascript:void(0)" onclick="wire_rope()">钢丝绳</a></li>
+
+                </ul>
+            </div>
+            <div title="数据处理" data-icon="/static/lib/images/145.png">
+                <ul>
+                    <li><a href="javascript:void(0)" onclick="View_test_records()">查看试验记录</a></li>
+                    <li><a href="javascript:void(0)" onclick="Error_Handling_List()">错误处理列表</a></li>
+                </ul>
+            </div>
+            <div title="用户管理" data-icon="/static/lib/images/123.ico">
+                <ul>
+                    <li><a href="javascript:void(0)" onclick="User_list()">用户列表</a></li>
+                    <li><a href="javascript:void(0)" onclick="Machine_management()">机器管理</a></li>
+                    <li><a href="javascript:void(0)" onclick="Report_statistics()">报告统计</a></li>
+                    <li><a href="javascript:void(0)" onclick="Change_Password()">修改密码</a></li>
+                </ul>
+            </div>
+            <div title="退出" data-icon="/static/lib/images/789.png" style="padding:10px">
+                <li><a href="javascript:void(0)" onclick="showout()">退出登录</a></li>
+            </div>
+        </div>
+
+        <div style="display:none;">
+
+        </div>
+
+
+    </div>
+    <div position="center" title="巨力钢丝绳后台管理系统" id="portalMain">
+        <h4>欢迎回来! <span th:text="${currentUser.username}"></span></h4>
+
+    </div>
+    <!--<div position="right"></div>-->
+    <div position="top"><h1>巨力钢丝绳后台管理系统 </h1></div>
+    <!--<div position="bottom"></div>-->
+</div>
+
+<div style="display:none;">
+
+</div>
+
+<script type="text/javascript">
+    var g;
+
+    /*  $(function(){
+         $("#layout1").ligerLayout({});
+         $("#accordion1").ligerAccordion({
+             height:500
+         });
+     });*/
+    /*首页*/
+    function home_page() {
+        if (g == undefined) {
+            g = $("#portalMain").ligerPortal({
+                draggable: true,
+                columns: [{
+                    width: '100%',
+                    panels: [{
+                        title: '网络监控状态',
+                        width: '100%',
+                        height: 580,
+                        url: 'home_page',
+                        showClose: false
+                    }]
+                }]
+            });
+        } else {
+            g.remove({
+                rowIndex: 0,
+                columnIndex: 0,
+                index: 0
+            });
+            g.add({
+                rowIndex: 0, columnIndex: 0, panel: {
+                    title: '网络监控状态',
+                    width: '100%',
+                    height: 580,
+                    url: 'home_page',
+                    showClose: false
+                }
+            });
+        }
+    }
+    /*退出登录*/
+    function showout() {
+        location.href = "index";
+
+    }
+    /*委托单*/
+    function Order_form() {
+        if (g == undefined) {
+            g = $("#portalMain").ligerPortal({
+                draggable: true,
+                columns: [{
+                    width: '100%',
+                    panels: [{
+                        title: '委托单',
+                        width: '100%',
+                        height: 580,
+                        url: 'Order_form',
+                        showClose: false
+                    }]
+                }]
+            });
+        } else {
+            g.remove({
+                rowIndex: 0,
+                columnIndex: 0,
+                index: 0
+            });
+            g.add({
+                rowIndex: 0, columnIndex: 0, panel: {
+                    title: '委托单',
+                    width: '100%',
+                    height: 580,
+                    url: 'Order_form',
+                    showClose: false
+                }
+            });
+        }
+    }
+
+    /*钢丝报表*/
+    function Wire_Report() {
+        if (g == undefined) {
+            g = $("#portalMain").ligerPortal({
+                draggable: true,
+                columns: [{
+                    width: '100%',
+                    panels: [{
+                        title: '钢丝报表',
+                        width: '100%',
+                        height: 580,
+                        url: 'Wire_Report',
+                        showClose: false
+                    }]
+                }]
+            });
+        } else {
+            g.remove({
+                rowIndex: 0,
+                columnIndex: 0,
+                index: 0
+            });
+            g.add({
+                rowIndex: 0, columnIndex: 0, panel: {
+                    title: '钢丝报表',
+                    width: '100%',
+                    height: 580,
+                    url: 'Wire_Report',
+                    showClose: false
+                }
+            });
+        }
+    }
+
+    /*钢丝绳*/
+    function wire_rope() {
+        if (g == undefined) {
+            g = $("#portalMain").ligerPortal({
+                draggable: true,
+                columns: [{
+                    width: '100%',
+                    panels: [{
+                        title: '钢丝绳报表',
+                        width: '100%',
+                        height: 580,
+                        url: 'wire_rope',
+                        showClose: false
+                    }]
+                }]
+            });
+        } else {
+            g.remove({
+                rowIndex: 0,
+                columnIndex: 0,
+                index: 0
+            });
+            g.add({
+                rowIndex: 0, columnIndex: 0, panel: {
+                    title: '钢丝绳报表',
+                    width: '100%',
+                    height: 580,
+                    url: 'wire_rope',
+                    showClose: false
+                }
+            });
+        }
+    }
+
+    /*查看试验记录*/
+    function View_test_records() {
+        if (g == undefined) {
+            g = $("#portalMain").ligerPortal({
+                draggable: true,
+                columns: [{
+                    width: '100%',
+                    panels: [{
+                        title: '查看试验记录',
+                        width: '100%',
+                        height: 580,
+                        url: 'View_test_records',
+                        showClose: false
+                    }]
+                }]
+            });
+        } else {
+            g.remove({
+                rowIndex: 0,
+                columnIndex: 0,
+                index: 0
+            });
+            g.add({
+                rowIndex: 0, columnIndex: 0, panel: {
+                    title: '查看试验记录',
+                    width: '100%',
+                    height: 580,
+                    url: 'View_test_records',
+                    showClose: false
+                }
+            });
+        }
+    }
+    /*错误处理列表*/
+    function Error_Handling_List() {
+        if (g == undefined) {
+            g = $("#portalMain").ligerPortal({
+                draggable: true,
+                columns: [{
+                    width: '100%',
+                    panels: [{
+                        title: '错误处理列表',
+                        width: '100%',
+                        height: 580,
+                        url: 'Error_Handling_List',
+                        showClose: false
+                    }]
+                }]
+            });
+        } else {
+            g.remove({
+                rowIndex: 0,
+                columnIndex: 0,
+                index: 0
+            });
+            g.add({
+                rowIndex: 0, columnIndex: 0, panel: {
+                    title: '错误处理列表',
+                    width: '100%',
+                    height: 580,
+                    url: 'Error_Handling_List',
+                    showClose: false
+                }
+            });
+        }
+    }
+    /*用户列表*/
+    function User_list() {
+        if (g == undefined) {
+            g = $("#portalMain").ligerPortal({
+                draggable: true,
+                columns: [{
+                    width: '100%',
+                    panels: [{
+                        title: '用户列表',
+                        width: '100%',
+                        height: 580,
+                        url: 'User_list',
+                        showClose: false
+                    }]
+                }]
+            });
+        } else {
+            g.remove({
+                rowIndex: 0,
+                columnIndex: 0,
+                index: 0
+            });
+            g.add({
+                rowIndex: 0, columnIndex: 0, panel: {
+                    title: '用户列表',
+                    width: '100%',
+                    height: 580,
+                    url: 'User_list',
+                    showClose: false
+                }
+            });
+        }
+    }
+
+    /*机器管理*/
+    function Machine_management() {
+        if (g == undefined) {
+            g = $("#portalMain").ligerPortal({
+                draggable: true,
+                columns: [{
+                    width: '100%',
+                    panels: [{
+                        title: '机器管理',
+                        width: '100%',
+                        height: 580,
+                        url: 'Machine_management',
+                        showClose: false
+                    }]
+                }]
+            });
+        } else {
+            g.remove({
+                rowIndex: 0,
+                columnIndex: 0,
+                index: 0
+            });
+            g.add({
+                rowIndex: 0, columnIndex: 0, panel: {
+                    title: '机器管理',
+                    width: '100%',
+                    height: 580,
+                    url: 'Machine_management',
+                    showClose: false
+                }
+            });
+        }
+    }
+
+
+
+    /*统计报告*/
+
+    function Report_statistics() {
+        if (g == undefined) {
+            g = $("#portalMain").ligerPortal({
+                draggable: true,
+                columns: [{
+                    width: '100%',
+                    panels: [{
+                        title: '统计报告',
+                        width: '100%',
+                        height: 580,
+                        url: 'Report_statistics',
+                        showClose: false
+                    }]
+                }]
+            });
+        } else {
+            g.remove({
+                rowIndex: 0,
+                columnIndex: 0,
+                index: 0
+            });
+            g.add({
+                rowIndex: 0, columnIndex: 0, panel: {
+                    title: '统计报告',
+                    width: '100%',
+                    height: 580,
+                    url: 'Report_statistics',
+                    showClose: false
+                }
+            });
+        }
+    }
+
+    /*修改密码*/
+
+    function Change_Password() {
+        if (g == undefined) {
+            g = $("#portalMain").ligerPortal({
+                draggable: true,
+                columns: [{
+                    width: '100%',
+                    panels: [{
+                        title: '修改密码',
+                        width: '100%',
+                        height: 580,
+                        url: 'Change_Password',
+                        showClose: false
+                    }]
+                }]
+            });
+        } else {
+            g.remove({
+                rowIndex: 0,
+                columnIndex: 0,
+                index: 0
+            });
+            g.add({
+                rowIndex: 0, columnIndex: 0, panel: {
+                    title: '修改密码',
+                    width: '100%',
+                    height: 580,
+                    url: 'Change_Password',
+                    showClose: false
+                }
+            });
+        }
+    }
+
+</script>
+</body>
+</html>

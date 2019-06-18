@@ -1,0 +1,213 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>表格控件 - toolbar</title>
+    <meta name="keywords" content="免费控件,免费UI控件,免费开源UI,免费开源UI控件,免费开源UI框架,可编辑表格,datagrid,editgrid" />
+    <link href="/static/lib/ligerUI/skins/Aqua/css/ligerui-all.css" rel="stylesheet" type="text/css" />
+    <link href="/static/lib/ligerUI/skins/ligerui-icons.css" rel="stylesheet" type="text/css" />
+    <link href="/static/lib/ligerUI/skins/Gray/css/all.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet"/>
+    <script src="http://i.gtimg.cn/qzone/biz/gdt/lib/jquery/jquery-2.1.4.js?max_age=31536000"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script src="/static/lib/jquery/jquery-1.9.0.min.js" type="text/javascript"></script>
+    <script src="/static/lib/ligerUI/js/core/base.js" type="text/javascript"></script>
+    <script src="/static/lib/ligerUI/js/plugins/ligerGrid.js" type="text/javascript"></script>
+    <script src="/static/lib/ligerUI/js/plugins/ligerToolBar.js" type="text/javascript"></script>
+    <script src="/static/lib/ligerUI/js/plugins/ligerResizable.js" type="text/javascript"></script>
+    <script src="/static/lib/ligerUI/js/plugins/ligerCheckBox.js" type="text/javascript"></script>
+    <script src="/static/lib/ligerUI/js/plugins/ligerDrag.js" type="text/javascript"></script>
+    <script src="/static/lib/ligerUI/js/plugins/ligerDialog.js" type="text/javascript"></script>
+    <script src="/static/lib/ligerUI/js/plugins/ligerResizable.js" type="text/javascript"></script>
+    <script src="/static/lib/ligerUI/js/plugins/ligerComboBox.js" type="text/javascript"></script>
+
+
+
+
+    <script type="text/javascript">
+
+        function itemclick()
+        {
+
+            window.location.reload();
+
+        }
+
+
+        toastr.options = {
+            closeButton: false,
+            debug: false,
+            progressBar: false,
+            positionClass: "toast-top-center",
+            onclick: null,
+            showDuration: "200",
+            hideDuration: "1000",
+            timeOut: "1750",
+            extendedTimeOut: "1000",
+            showEasing: "swing",
+            hideEasing: "linear",
+            showMethod: "fadeIn",
+            hideMethod: "fadeOut"
+        };
+
+
+        $(document).ready(function () {
+            $.ajax({
+                url:"getUserList",
+                success:function (result) {
+                    console.log(result)
+                    window['g'] = $("#maingrid").ligerGrid({
+                        height:'100%',
+                        columns: [
+                            { display: 'id', hide: true ,name: 'id',  align: 'left', width: 1, minWidth: 1 },
+                            { display: '用户名',  name: 'username', align: 'left', width: 100, minWidth: 60 },
+                            { display: '权限', name: 'userRank', width: 100, minWidth: 100 },
+                            { display: '班级', name: 'userClass', minWidth: 100 },
+                            {
+                                display: '修改', isSort: false, render: function (rowdata, rowindex, value) {
+                                    var h = "";
+                                    {
+                                        h += "<a href='javascript:updateRow(" + JSON.stringify(rowdata.id)+ ")'>修改</a> ";
+                                    }
+
+                                    return h;
+                                }
+                                },
+                            {
+                                display: '重置密码', isSort: false, render: function (rowdata, rowindex, value) {
+                                    var h = "";
+                                    {
+                                        h += "<a href='javascript:resetRow(" + JSON.stringify(rowdata.id) + ")'>重置</a> ";
+                                    }
+
+                                    return h;
+                                }
+                                },
+                            {
+                                display: '删除用户' , isSort: false, render: function (rowdata, rowindex, value) {
+                                    var h = "";
+                                    {
+                                        h += "<a href='javascript:deleteRow(" + JSON.stringify(rowdata.id)  + ")'>删除</a> ";
+
+                                    }
+
+                                    return h;
+                                }
+                                }
+
+                        ], data:result.extend.MsgList,  pageSize:30 ,rownumbers:true,
+                        toolbar: { items: [
+                                { text: '刷新列表', click: itemclick, icon: 'refresh' },
+                                { text: '添加用户', click: tianjia, icon: 'add' }
+                            ]
+                        }
+                    });
+
+                    toastr.success('刷新列表成功');
+                    $("#pageloading").hide();
+                },
+                error:function () {
+                    toastr.error("服务器繁忙，请稍后再试！")
+                }
+            });
+        });
+
+        function tianjia() {
+            $.ligerDialog.open({
+                height: 450,
+                width: 500,
+                title: '用户添加',
+                url: 'toAddUserPage',
+                showMax: false,
+                showToggle: true,
+                showMin: false,
+                isResize: true,
+                slide: false,
+                data: {
+                    name: $("#txtValue").val()
+                },
+                //自定义参数
+                myDataName: $("#txtValue").val()
+            });
+        }
+
+
+        function deleteRow(id)
+        {
+
+            if (confirm('确定删除?'))
+            {
+               $.ajax({
+                   url:"/userDelete/" + id,
+                   type:"PUT",
+                   success:function (result) {
+                       g.reload(result.extend.MsgList);
+                       toastr.success('删除成功');
+                   },
+                   error:function () {
+                       toastr.error("服务器繁忙，请稍后再试！")
+                   }
+               });
+            }
+
+        }
+
+        function updateRow(id) {
+            console.log(id)
+            $.ligerDialog.open({
+                height: 400,
+                width: 450,
+                title: '修改用户',
+                url: '/toupdateUserPage/' + id,
+                showMax: false,
+                showToggle: true,
+                showMin: false,
+                isResize: true,
+                slide: false,
+                data: {
+                    name: $("#txtValue").val()
+                },
+                //自定义参数
+                myDataName: $("#txtValue").val()
+            });
+        }
+
+        function resetRow(id)
+        {
+            $.ligerDialog.open({
+                height: 400,
+                width: 450,
+                title: '重置密码',
+                url: '/toresetPwd/' + id,
+                showMax: false,
+                showToggle: true,
+                showMin: false,
+                isResize: true,
+                slide: false,
+                data: {
+                    name: $("#txtValue").val()
+                },
+                //自定义参数
+                myDataName: $("#txtValue").val()
+            });
+        }
+
+    </script>
+</head>
+<body style="overflow-x:hidden; padding:2px;">
+<div class="l-loading" style="display:block" id="pageloading"></div>
+<!--<a class="l-button" style="width:120px;float:left; margin-left:10px; display:none;" onclick="deleteRow()">删除选择的行</a>-->
+
+
+<div class="l-clear"></div>
+
+<div id="maingrid"></div>
+
+<div style="display:none;">
+
+</div>
+
+</body>
+</html>

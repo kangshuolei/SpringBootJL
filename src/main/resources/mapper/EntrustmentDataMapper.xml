@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaokang.demo.dao.EntrustmentDataMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xiaokang.demo.bean.EntrustmentData">
+        <id column="id" property="id" />
+        <result column="entrustment_number" property="entrustmentNumber" />
+        <result column="date" property="date" />
+        <result column="product_name" property="productName" />
+        <result column="reviewer" property="reviewer" />
+        <result column="steel_number" property="steelNumber" />
+        <result column="test_clerk_number" property="testClerkNumber" />
+        <result column="test_machine" property="testMachine" />
+        <result column="standard" property="standard" />
+        <result column="state" property="state" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, entrustment_number, date, product_name, reviewer, steel_number, test_clerk_number, test_machine, standard, state
+    </sql>
+
+</mapper>

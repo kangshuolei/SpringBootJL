@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaokang.demo.dao.WireRopeMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xiaokang.demo.bean.WireRope">
+        <id column="id" property="id" />
+        <result column="enstrustment_number" property="enstrustmentNumber" />
+        <result column="producer_number" property="producerNumber" />
+        <result column="report_number" property="reportNumber" />
+        <result column="report_date" property="reportDate" />
+        <result column="specification" property="specification" />
+        <result column="structure" property="structure" />
+        <result column="strength_level" property="strengthLevel" />
+        <result column="surface_state" property="surfaceState" />
+        <result column="twisting_method" property="twistingMethod" />
+        <result column="measure_break_tensile" property="measureBreakTensile" />
+        <result column="min_break_tensile" property="minBreakTensile" />
+        <result column="diamete" property="diamete" />
+        <result column="diamete_non_rundness" property="diameteNonRundness" />
+        <result column="stock_split_method" property="stockSplitMethod" />
+        <result column="trial_class" property="trialClass" />
+        <result column="non_trial_class" property="nonTrialClass" />
+        <result column="center_diamete" property="centerDiamete" />
+        <result column="center_strength" property="centerStrength" />
+        <result column="temperature" property="temperature" />
+        <result column="evaluation" property="evaluation" />
+        <result column="memo" property="memo" />
+        <result column="test_standard" property="testStandard" />
+        <result column="recorder_number" property="recorderNumber" />
+        <result column="recorder_memo" property="recorderMemo" />
+        <result column="state" property="state" />
+        <result column="judge_standard" property="judgeStandard" />
+        <result column="sample_state" property="sampleState" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, enstrustment_number, producer_number, report_number, report_date, specification, structure, strength_level, surface_state, twisting_method, measure_break_tensile, min_break_tensile, diamete, diamete_non_rundness, stock_split_method, trial_class, non_trial_class, center_diamete, center_strength, temperature, evaluation, memo, test_standard, recorder_number, recorder_memo, state, judge_standard, sample_state
+    </sql>
+
+</mapper>

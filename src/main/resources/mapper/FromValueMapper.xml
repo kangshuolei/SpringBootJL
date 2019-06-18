@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaokang.demo.dao.FromValueMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xiaokang.demo.bean.FromValue">
+        <id column="id" property="id" />
+        <result column="standard_num" property="standardNum" />
+        <result column="rated_strength" property="ratedStrength" />
+        <result column="surface_state" property="surfaceState" />
+        <result column="twisting_method" property="twistingMethod" />
+        <result column="state" property="state" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, standard_num, rated_strength, surface_state, twisting_method, state
+    </sql>
+
+</mapper>

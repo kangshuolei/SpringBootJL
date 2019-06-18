@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaokang.demo.dao.EntrustmentMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xiaokang.demo.bean.Entrustment">
+        <id column="id" property="id" />
+        <result column="sample_batch" property="sampleBatch" />
+        <result column="entrustment_number" property="entrustmentNumber" />
+        <result column="state" property="state" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, sample_batch, entrustment_number, state
+    </sql>
+    <update id="UpdateAndDeleteEnt">
+        update entrustment set state = '999' where id = #{id,jdbcType=INTEGER}
+    </update>
+
+
+    <select id="getAll" parameterType="com.xiaokang.demo.bean.Entrustment" resultMap="BaseResultMap">
+        select * from entrustment   where state=0 order by id desc
+    </select>
+
+</mapper>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaokang.demo.dao.WireAttributesGbt201182017Mapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xiaokang.demo.bean.WireAttributesGbt201182017">
+        <id column="id" property="id" />
+        <result column="structure" property="structure" />
+        <result column="minimum_breaking_force" property="minimumBreakingForce" />
+        <result column="small_minimum_breaking_force" property="smallMinimumBreakingForce" />
+        <result column="tanning_loss_factor" property="tanningLossFactor" />
+        <result column="partial_intensity_low" property="partialIntensityLow" />
+        <result column="partial_reverse_low" property="partialReverseLow" />
+        <result column="intensity_low" property="intensityLow" />
+        <result column="reverse_low" property="reverseLow" />
+        <result column="twist_diatance" property="twistDiatance" />
+        <result column="state" property="state" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, structure, minimum_breaking_force, small_minimum_breaking_force, tanning_loss_factor, partial_intensity_low, partial_reverse_low, intensity_low, reverse_low, twist_diatance, state
+    </sql>
+
+</mapper>

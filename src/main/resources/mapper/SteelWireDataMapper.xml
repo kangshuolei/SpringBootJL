@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaokang.demo.dao.SteelWireDataMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xiaokang.demo.bean.SteelWireData">
+        <id column="id" property="id" />
+        <result column="entrustment_number" property="entrustmentNumber" />
+        <result column="production_number" property="productionNumber" />
+        <result column="p_diamete" property="pDiamete" />
+        <result column="f_diamete" property="fDiamete" />
+        <result column="n_diamete" property="nDiamete" />
+        <result column="use" property="use" />
+        <result column="surface" property="surface" />
+        <result column="break_tensile" property="breakTensile" />
+        <result column="tensile_strength" property="tensileStrength" />
+        <result column="knot_tension" property="knotTension" />
+        <result column="knot_rate" property="knotRate" />
+        <result column="torsion_times" property="torsionTimes" />
+        <result column="bending_times" property="bendingTimes" />
+        <result column="steel_length" property="steelLength" />
+        <result column="judge" property="judge" />
+        <result column="board" property="board" />
+        <result column="wheel_number" property="wheelNumber" />
+        <result column="grade_steel" property="gradeSteel" />
+        <result column="producer" property="producer" />
+        <result column="recorder_number" property="recorderNumber" />
+        <result column="memo1" property="memo1" />
+        <result column="state" property="state" />
+        <result column="sample_batch" property="sampleBatch" />
+        <result column="memo2" property="memo2" />
+        <result column="strength_level" property="strengthLevel" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, entrustment_number, production_number, p_diamete, f_diamete, n_diamete, use, surface, break_tensile, tensile_strength, knot_tension, knot_rate, torsion_times, bending_times, steel_length, judge, board, wheel_number, grade_steel, producer, recorder_number, memo1, state, sample_batch, memo2, strength_level
+    </sql>
+
+</mapper>

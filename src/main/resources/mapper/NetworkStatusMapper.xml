@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xiaokang.demo.dao.NetworkStatusMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xiaokang.demo.bean.NetworkStatus">
+        <id column="id" property="id" />
+        <result column="address_coding" property="addressCoding" />
+        <result column="networking_status" property="networkingStatus" />
+        <result column="type" property="type" />
+        <result column="machine_type" property="machineType" />
+        <result column="machine_number" property="machineNumber" />
+        <result column="port_number" property="portNumber" />
+        <result column="create_date" property="createDate" />
+        <result column="machine_addr" property="machineAddr" />
+        <result column="state" property="state" />
+    </resultMap>
+
+    <resultMap id="ResultMap" type="com.xiaokang.demo.bean.NetworkStatus">
+        <id column="id" property="id" />
+        <result column="address_coding" property="addressCoding" />
+        <result column="networking_status" property="networkingStatus" />
+        <result column="type" property="type" />
+        <result column="machine_type" property="machineType" />
+        <result column="machine_number" property="machineNumber" />
+        <result column="state" property="state" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, address_coding, networking_status, type, machine_type, machine_number, port_number, create_date, machine_addr, state
+    </sql>
+    <select id="getAll" parameterType="com.xiaokang.demo.bean.NetworkStatus" resultMap="ResultMap">
+     select id,address_coding,networking_status,type,machine_type,machine_number
+        from network_status where state = 000
+    </select>
+
+</mapper>
